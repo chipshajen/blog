@@ -17,5 +17,35 @@ model User {
   id Int @id @default(autoincrement())
   username String @unique
   email String @unique
-  createdAt DateTime 
+  createdAt DateTime @default(now())
+  editor Boolean @default(false)
+  posts Post[]
+  comments Comment[]
 }
+
+model Post {
+  id Int @id @default(autoincrement())
+  title String
+  content String?
+  status Status @default(Draft)
+  createdAt DateTime @default(now())
+  authorId Int
+  author User @relation(fields: [authorId], references: [id])
+  comments Comment[]
+}
+
+enum Status {
+  Draft
+  Published
+}
+
+model Comment {
+  id Int @id @default(autoincrement())
+  content String
+  createdAt DateTime @default(now())
+  authorId Int?
+  author User? @relation(fields: [authorId], references: [id])
+  postId Int
+  post Post @relation(fields: [postId], references: [id])
+}
+

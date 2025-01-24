@@ -2,8 +2,6 @@ const { getAllPosts, getPost, createPost, updatePost, deletePost } = require('..
 
 const getAll = async(req, res, next) => {
     const posts = await getAllPosts()
-    console.log('hello')
-    console.log(posts)
     res.json(posts)
 }
 

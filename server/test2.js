@@ -5,11 +5,11 @@ const prisma = new PrismaClient()
 
 
 async function main(){
-    const user = await prisma.post.create({
+    const user = await prisma.user.create({
         data: {
-            title: 'First post',
-            content: 'I like baber',
-            authorId: 1
+            username: "chipshajen",
+            email: "hi@me.com",
+            editor: true
         }
     })
 

@@ -17,7 +17,7 @@ const get = async(req, res, next) => {
 const create = async(req, res, next) => {
     const post = await createPost({
         title: req.body.title,
-        authorId: req.user.authorId
+        authorId: req.user.id
     })
 
     res.json(post)

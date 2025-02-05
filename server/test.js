@@ -7,8 +7,8 @@ const prisma = new PrismaClient()
 async function main(){
     const user = await prisma.post.create({
         data: {
-            title: 'First post',
-            content: 'I like baber',
+            title: 'Second post',
+            content: 'I love cuddlebear',
             authorId: 1
         }
     })

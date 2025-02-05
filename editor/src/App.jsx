@@ -2,6 +2,8 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+
 
 import PostCard from './components/PostCard'
 
@@ -26,11 +28,11 @@ function App() {
 
   return (
     <div>
-      <h1>API Request Example</h1>
+      <h1>Babe Blog <Link to="/posts/new">Create New Post</Link></h1>
       {posts && posts.map(post => {
         return <PostCard key={post.id} post={post} />
-})}
-      
+      })}
+
     </div>
   );
 }

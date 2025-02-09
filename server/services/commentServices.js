@@ -5,7 +5,7 @@ const getAllCommentsFromPost = async(postId) => {
     try{
         const comments = await prisma.comment.findMany({
             where: {
-                postId: postId
+                postId: +postId
             }
         })
         return comments
@@ -20,8 +20,8 @@ const createComment = async({content, postId}) => {
         const comment = await prisma.comment.create({
             data: {
                 content: content,
-                authorId: req.user.id,
-                postId: postId
+                authorId: +req.user.id,
+                postId: +postId
             }
         })
         console.log(comment)
@@ -37,7 +37,7 @@ const updateComment = async(id, content) => {
                 content: content
             },
             where: {
-                id: id
+                id: +id
             }
         })
         console.log(comment)
@@ -50,7 +50,7 @@ const deleteComment = async() => {
     try{
         const comment = await prisma.comment.delete({
             where: {
-                id: id
+                id: +id
             }
         })
         console.log(comment)

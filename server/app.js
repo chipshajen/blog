@@ -18,10 +18,6 @@ app.get('/api/test', (req, res) => {
 app.use('/user', userRouter)
 app.use('/posts', postRouter)
 
-app.get('/', (req, res) => {
-    res.json({"msg": "hello"})
-})
-
 app.post('/login', (req, res) => {
     console.log((req.body.msg))
     res.sendStatus(200)

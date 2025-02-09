@@ -4,8 +4,6 @@ const prisma = new PrismaClient()
 const getAllPosts = async() => {
     try{
         const posts = await prisma.post.findMany({})
-
-        console.log(posts)
         return posts
     } catch(err) {
         console.log(err)
@@ -16,11 +14,9 @@ const getPost = async(id) => {
     try{
         const post = await prisma.post.findUnique({
             where: {
-                id: id
+                id: +id
             }
         })
-
-        console.log(post)
         return post
     } catch(err) {
         console.log(err)
@@ -32,11 +28,9 @@ const createPost = async({title, authorId}) => {
         const post = await prisma.post.create({
             data: {
                 title: title,
-                authorId: authorId
+                authorId: +authorId
             }
         })
-
-        console.log(post)
         return post
     } catch(err) {
         console.log(err)
@@ -47,7 +41,7 @@ const updatePost = async({postId, title, content, status}) => {
     try{
         const post = await prisma.post.update({
             where: {
-                id: postId
+                id: +postId
             },
             data: {
                 title: title,
@@ -55,8 +49,23 @@ const updatePost = async({postId, title, content, status}) => {
                 status: status
             }
         })
+        return post
+    } catch(err) {
+        console.log(err)
+    }
+}
 
-        console.log(post)
+const updatePostStatus = async({postId, status}) => {
+    try{
+        const post = await prisma.post.update({
+            where: {
+                id: +postId
+            },
+            data: {
+                status: status
+            }
+        })
+        return post
     } catch(err) {
         console.log(err)
     }
@@ -66,11 +75,9 @@ const deletePost = async({postId}) => {
     try{
         const post = await prisma.post.delete({
             where: {
-                id: postId
+                id: +postId
             }
         })
-
-        console.log(post)
     } catch(err) {
         console.log(err)
     }
@@ -81,5 +88,6 @@ module.exports = {
     getPost,
     createPost,
     updatePost,
+    updatePostStatus,
     deletePost
 }

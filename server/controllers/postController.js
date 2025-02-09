@@ -1,4 +1,4 @@
-const { getAllPosts, getPost, createPost, updatePost, deletePost } = require('../services/postServices')
+const { getAllPosts, getPost, createPost, updatePost, updatePostStatus, deletePost } = require('../services/postServices')
 
 const getAll = async(req, res, next) => {
     const posts = await getAllPosts()
@@ -8,7 +8,6 @@ const getAll = async(req, res, next) => {
 const get = async(req, res, next) => {
     const post = await getPost(req.params.postId)
 
-    console.log(post)
     res.json(post)
 }
 
@@ -22,14 +21,26 @@ const create = async(req, res, next) => {
 }
 
 const update = async(req, res, next) => {
+
+    console.log(req.body)
+
     const post = await updatePost({
         postId: req.params.postId,
         title: req.body.title,
         content: req.body.content,
         status: req.body.status
     })
+    res.json(post)
+}
 
-    console.log(post)
+const updateStatus = async(req, res, next) => {
+
+    console.log(req.body)
+
+    const post = await updatePost({
+        postId: req.params.postId,
+        status: req.body.status
+    })
     res.json(post)
 }
 
@@ -45,5 +56,6 @@ module.exports = {
     get,
     create,
     update,
+    updateStatus,
     deletee
 }

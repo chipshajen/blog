@@ -9,3 +9,13 @@
   border: 5px solid grey;
   margin-top: 8px;
 }
+
+.post-textarea {
+  width: 100%;
+  resize: none;
+}
+
+button {
+  min-width: 5em;
+  min-height: 2em;
+}

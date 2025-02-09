@@ -5,6 +5,7 @@ const postController = require('../controllers/postController')
 postRouter.get('/', postController.getAll)
 postRouter.get('/:postId', postController.get)
 postRouter.post('/', postController.create)
+postRouter.put('/:postId/status', postController.updateStatus)
 postRouter.put('/:postId', postController.update)
 postRouter.delete('/:postId', postController.deletee)
 

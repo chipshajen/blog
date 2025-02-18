@@ -5,7 +5,7 @@ const prisma = new PrismaClient()
 
 
 async function main(){
-    const user = await prisma.post.findMany({
+    const user = await prisma.user.findMany({
         
     })
 

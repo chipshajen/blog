@@ -5,6 +5,16 @@
   text-align: center;
 }
 
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pick-post-status {
+  margin-left: auto;
+}
+
 .post-card-container {
   border: 5px solid grey;
   margin-top: 8px;
@@ -13,6 +23,20 @@
 .post-textarea {
   width: 100%;
   resize: none;
+}
+
+.post-update-button {
+  display: flex;
+  justify-content: end;
+}
+
+.post-update-button:hover {
+  background-color: aqua;
+}
+
+.post-form textarea {
+  resize: none;
+  width: 100%
 }
 
 button {

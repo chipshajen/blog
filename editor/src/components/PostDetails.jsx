@@ -35,10 +35,26 @@ export default function PostDetails({post}) {
     
 
   return (
-    <div>
-        <input type="text" name="title" id="title" value={postForm.title} onChange={handleChange}/>
-        <textarea className="post-textarea" name="content" id="content" value={postForm.content} onChange={handleChange}></textarea>
+    <div className="post-details">
+        <h1>Title</h1>
+        <input 
+            type="text" 
+            name="title" 
+            id="title" 
+            value={postForm.title} 
+            onChange={handleChange}
+        />
+        <h1>Content</h1>
+        <textarea 
+            className="post-textarea" 
+            name="content" 
+            id="content" 
+            value={postForm.content} 
+            onChange={handleChange}>
+        </textarea>
+        <div className="post-update-button">
         <Button onClick={handleUpdate} text="Update Post"/>
+        </div>
     </div>
   )
 }

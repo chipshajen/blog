@@ -1,6 +1,6 @@
 import App from '../App'
 import Post from '../components/Post'
-import PostNew from '../components/PostCard'
+import PostNew from '../components/PostNew'
 
 const routes = [
     {

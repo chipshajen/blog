@@ -23,17 +23,21 @@ const getPost = async(id) => {
     }
 }
 
-const createPost = async({title, authorId}) => {
+const createPost = async({title, content, authorId}) => {
     try{
+        console.log(title)
+
         const post = await prisma.post.create({
             data: {
                 title: title,
+                content: content,
+                status: "Draft",
                 authorId: +authorId
             }
         })
         return post
     } catch(err) {
-        console.log(err)
+        // console.log(err)
     }
 }
 

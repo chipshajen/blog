@@ -12,9 +12,12 @@ const get = async(req, res, next) => {
 }
 
 const create = async(req, res, next) => {
+    console.log(req.body)
+
     const post = await createPost({
         title: req.body.title,
-        authorId: req.user.id
+        content: req.body.content,
+        authorId: req.user?.id ?? 1
     })
 
     res.json(post)
@@ -37,7 +40,7 @@ const updateStatus = async(req, res, next) => {
 
     console.log(req.body)
 
-    const post = await updatePost({
+    const post = await updatePostStatus({
         postId: req.params.postId,
         status: req.body.status
     })

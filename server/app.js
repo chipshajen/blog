@@ -3,18 +3,21 @@ const app = express()
 const cors = require('cors')
 require('dotenv').config()
 
+const passport = require('./config/passport')
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
+
 const userRouter = require('./routes/userRouter')
 const postRouter = require('./routes/postRouter')
+const authRouter = require('./routes/authRouter')
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
 app.use(cors())
+app.use(passport.initialize())
 
-app.get('/api/test', (req, res) => {
-    console.log("hello")
-    return res.json({"msg": "hello this is the return"})
-})
+app.use('/auth', authRouter)
 app.use('/user', userRouter)
 app.use('/posts', postRouter)
 

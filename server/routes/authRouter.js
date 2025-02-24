@@ -45,11 +45,15 @@ authRouter.post('/login', async(req, res) => {
 
     const token = jwt.sign({id: user.id, username: user.username}, process.env.JWT_SECRET, {expiresIn: '1h'})
 
-    return res.json({token})
+    return res.json({token, username: username})
 })
 
-authRouter.get('/test', passport.authenticate('jwt', {session: false}), (req, res) => {
-    res.json({msg: "hello", user: req.user})
-})
+authRouter.get('/validate', passport.authenticate('jwt', { session: false }), (req, res) => {
+    if (!req.user) {
+        return res.status(401).json({ valid: false, msg: "Unauthorized" });
+    }
+    console.log("User validated:", req.user.username);
+    res.json({ valid: true, username: req.user.username });
+});
 
 module.exports = authRouter

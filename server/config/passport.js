@@ -6,8 +6,6 @@ const dotenv = require('dotenv').config()
 const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
 
-const users = [{ id: 1, username: 'testuser', password: '$2a$10$1QvRJlN67K5Jq/A0Gpo8seO3xYVV/jqzxLmtuRC1ICwDWOGXLx.mS' }] // Mock database
-
 const options = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     secretOrKey: process.env.JWT_SECRET

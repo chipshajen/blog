@@ -30,8 +30,8 @@
   justify-content: end;
 }
 
-.post-update-button:hover {
-  background-color: aqua;
+.post-update-button button:hover {
+  background-color: blue;
 }
 
 .post-form textarea {

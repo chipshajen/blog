@@ -2,7 +2,7 @@ import { useContext } from "react"
 import LoginForm from "./LoginForm"
 import Button from "./Button"
 import { AuthContext } from "../context/AuthContext"
-
+import { Link } from "react-router-dom"
 
 
 export default function Home() {
@@ -31,12 +31,16 @@ export default function Home() {
     function handleCheckLocalStorage(){
         console.log(localStorage.getItem("jwt"))
         console.log(localStorage.getItem("username"))
+        console.log(user)
     }
 
   return (
     <>
         <LoginForm onLogin={handleLogin}/>
         <Button onClick={handleCheckLocalStorage} text="Check LocalStorage"/>
+        {!user && (
+            <Link to="/register"><button>Register</button></Link>
+        )}
     </>
   )
 }

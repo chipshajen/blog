@@ -12,11 +12,13 @@ export function AuthProvider({ children }) {
     useEffect(() => {
         const token = localStorage.getItem("jwt");
         if (token) {
+            console.log("fetching")
             fetch("http://localhost:3000/auth/validate", {
                 headers: { Authorization: `Bearer ${token}` },
             })
             .then((response) => response.json())
             .then((data) => {
+                console.log(data.valid)
                 if (data.valid) {
                     setUser({ username: data.username, token });
                 } else {

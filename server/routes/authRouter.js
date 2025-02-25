@@ -10,6 +10,26 @@ require('dotenv').config()
 authRouter.post('/register', async(req, res) => {
     const { username, password, email } = req.body
 
+    const matchedUser = await prisma.user.findFirst({
+        where: {
+            username: username
+        }
+    })
+
+    console.log(matchedUser)
+
+    if(matchedUser) res.json({"msg": "User with that name already exists"})
+        
+        const matchedEmail = await prisma.user.findFirst({
+        where: {
+            email: email
+        }
+    })
+
+    console.log(matchedEmail)
+
+    if(matchedEmail) res.json({"msg": "Account with that email already exists"})
+
     const salt = await bcrypt.genSalt(10)
     const hashedPassword = await bcrypt.hash(password, salt)
 
@@ -20,7 +40,7 @@ authRouter.post('/register', async(req, res) => {
             password: hashedPassword
         }
     })
- 
+    console.log("Succesfully created user")
     res.json(JSON.stringify({user}))
 })
 

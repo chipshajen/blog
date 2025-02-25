@@ -1,3 +1,8 @@
+import { useState, useEffect } from "react";
+import { Link } from 'react-router-dom'
+
+import PostCard from './PostCard'
+
 function PostList() {
     const [posts, setPosts] = useState(null)
 
@@ -10,7 +15,6 @@ function PostList() {
           return response.json();
         })
         .then((data) => {
-          console.log(data[0]); // Logs "Hello from Vite!"
           setPosts(data)
         })
         .catch((error) => console.error('Error:', error));
@@ -18,7 +22,7 @@ function PostList() {
   
     return (
       <div>
-        <h1>Babe Blog <Link to="/posts/new">Create New Post</Link></h1>
+        <h1><Link to="/">Back to Home</Link>Babe Blog <Link to="/posts/new">Create New Post</Link></h1>
         {posts && posts.map(post => {
           return <PostCard key={post.id} post={post} />
         })}

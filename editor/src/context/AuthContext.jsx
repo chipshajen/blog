@@ -4,21 +4,17 @@ export const AuthContext = createContext({ user: null, login: () => {}, logout: 
 
 export function AuthProvider({ children }) {
 
-    console.log("🔍 AuthProvider is mounting...");  // ✅ Debugging log
-
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const token = localStorage.getItem("jwt");
         if (token) {
-            console.log("fetching")
             fetch("http://localhost:3000/auth/validate", {
                 headers: { Authorization: `Bearer ${token}` },
             })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data.valid)
                 if (data.valid) {
                     setUser({ username: data.username, token });
                 } else {

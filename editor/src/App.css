@@ -43,3 +43,9 @@ button {
   min-width: 5em;
   min-height: 2em;
 }
+
+.welcome {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}

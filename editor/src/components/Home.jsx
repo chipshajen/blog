@@ -7,13 +7,9 @@ import { Link } from "react-router-dom"
 
 export default function Home() {
 
-    const { user, logout } = useContext(AuthContext)
-
-    console.log(user)
-    console.log(AuthContext)
+    const { user, logout, login, loading } = useContext(AuthContext)
 
     function handleLogin(formData){
-        console.log(formData)
         fetch('http://localhost:3000/auth/login', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -21,9 +17,7 @@ export default function Home() {
         })
         .then((response) => response.json())
         .then((data) => { 
-            console.log(data)
-            localStorage.setItem("jwt", data.token)
-            localStorage.setItem("username", data.username)
+            login(data.token, data.username)
         })
         .catch((error) => console.error(error))
     }
@@ -34,13 +28,28 @@ export default function Home() {
         console.log(user)
     }
 
-  return (
-    <>
-        <LoginForm onLogin={handleLogin}/>
-        <Button onClick={handleCheckLocalStorage} text="Check LocalStorage"/>
-        {!user && (
-            <Link to="/register"><button>Register</button></Link>
-        )}
-    </>
-  )
-}
+    return (
+        <div className="welcome">
+            {loading ? (
+                <h1>Loading</h1>
+            ) : (
+                <>
+                    {!user ? (
+                        <>
+                            <LoginForm onLogin={handleLogin} />
+                            <Button onClick={handleCheckLocalStorage} text="Check LocalStorage" />
+                            <Link to="/register">
+                                <button>Register</button>
+                            </Link>
+                        </>
+                    ) : (
+                        <>
+                        <h1>Welcome {user.username}</h1>
+                        <Button onClick={logout} text="Log Out"/>
+                        <Link to="/posts">Manage Posts</Link>
+                        </>
+                    )}
+                </>
+            )}
+        </div>
+    )}
